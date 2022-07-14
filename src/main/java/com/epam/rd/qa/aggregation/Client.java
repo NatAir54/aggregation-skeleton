@@ -1,31 +1,58 @@
 package com.epam.rd.qa.aggregation;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Client {
 
+    private final Deposit[] deposits;
+
     public Client() {
-        // TODO Replace throw with your code
-        throw new UnsupportedOperationException();
+
+        this.deposits = new Deposit[10];
     }
 
     public boolean addDeposit(Deposit deposit) {
-        // TODO Replace throw with your code
-        throw new UnsupportedOperationException();
+        for (int i=0; i<deposits.length; i++) {
+            if (deposits[i] == null) {
+                deposits[i] = deposit;
+                return true;
+            }
+        } return false;
     }
 
     public BigDecimal totalIncome() {
-        // TODO Replace throw with your code
-        throw new UnsupportedOperationException();
+            BigDecimal myTotal = new BigDecimal (0.00);
+            for (Deposit deposit : deposits) {
+                if (deposit != null) {
+                    myTotal = myTotal.add(deposit.income());
+                }
+            } return myTotal;
     }
 
+
     public BigDecimal maxIncome() {
-        // TODO Replace throw with your code
-        throw new UnsupportedOperationException();
+    BigDecimal myIncome = new BigDecimal (0.00);
+        for (int i = 0; i < deposits.length; i++) {
+            if (deposits[i] != null) {
+                if (deposits[i].income().compareTo(myIncome) > 0) {
+                    myIncome = deposits[i].income();
+                }
+            }
+        } return myIncome.setScale(2, RoundingMode.DOWN);
     }
 
     public BigDecimal getIncomeByNumber(int number) {
-        // TODO Replace throw with your code
-        throw new UnsupportedOperationException();
+        BigDecimal result = new BigDecimal (0.00);
+        for (int i = 0; i < deposits.length; i++) {
+            if (deposits[i] != null) {
+                if (i == number)
+                result = deposits[i].income();
+            }
+        }
+        return result.setScale(2, RoundingMode.DOWN);
     }
 }
