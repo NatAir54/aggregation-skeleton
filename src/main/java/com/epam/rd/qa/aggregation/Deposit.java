@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 
 public abstract class Deposit {
 
-    public BigDecimal amount;
-    public int period;
+    protected final BigDecimal amount;
+    protected final int period;
 
-    public Deposit (BigDecimal depositAmount, int depositPeriod) {
+    protected Deposit (BigDecimal depositAmount, int depositPeriod) {
         if(depositPeriod<=0 || depositAmount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException();
         }
